@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+    <script>
+        async function pingServer() {
+            try {
+                const response = await fetch('/api/health/ping');
+                const text = await response.text();
+                document.getElementById('response').textContent = `Server Response: ${text}`;
+            } catch (error) {
+                document.getElementById('response').textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Health Check UI</h1>
+<button onclick="pingServer()">Ping</button>
+<div id="response"></div>
+</body>
+</html>
